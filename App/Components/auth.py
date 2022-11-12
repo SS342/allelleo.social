@@ -7,6 +7,7 @@ from Defense.token import generate_token
 
 auth = flask.Blueprint("auth", __name__)
 
+
 @auth.route('/logout', methods=['GET', 'POST'])
 @login_required
 def logout():
@@ -43,5 +44,3 @@ def sign_up():
         else:
             return flask.render_template('auth/sign-up.html', error=res['status'].message)
     return flask.render_template('auth/sign-up.html', error=None)
-
-
