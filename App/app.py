@@ -10,6 +10,7 @@ from Defense.token import generate_token
 from API.api import api
 from Configs.app_config import config, init_app
 from Components.auth import auth
+from Components.error import error
 
 UserFollowingToUserDataBase()
 UserProfileDataBase()
@@ -24,6 +25,8 @@ login_manager.login_view = 'sign_in'
 app = init_app(app)
 app.register_blueprint(api, url_prefix="/api/v1")
 app.register_blueprint(auth)
+app.register_blueprint(error)
+
 
 # INSERT INTO users (id, nickname, email, name, surname, hashed_passwords) VALUES (0, 'allelleo', 'alex2005ov@gmail.com', 'Alexey', 'Ovchinnikov', 'fc300febae3b9a55723b7aecab31ce4469af3ad26501a982e416c6ac3471bb06:5fee1bad50e54831b1b3d9ee3c814962')
 
@@ -75,9 +78,7 @@ def my_profile_connections():
                                  following_list=UserFollowingToUserDataBase().get_following(current_user.id))
 
 
-@app.errorhandler(404)
-def not_found_error(error):
-    return flask.render_template('Error_pages/404.html'), 404
+
 
 
 HOST = config['app']['HOST']
