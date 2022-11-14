@@ -78,9 +78,6 @@ def my_profile_connections():
                                  following_list=UserFollowingToUserDataBase().get_following(current_user.id))
 
 
-
-
-
 HOST = config['app']['HOST']
 PORT = config['app']['PORT']
 
